@@ -1,4 +1,9 @@
-console.log('Welcome to the game');
+let computerScore = 0;
+let playerScore = 0;
+let computerSelections = [];
+let playerSelections = [];
+
+// console.log('Welcome to the game');
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
   return choices[Math.floor(Math.random() * choices.length)];
@@ -33,36 +38,119 @@ function playRound(playerSelectedValue, computerSelectedValue) {
   }
 }
 
-function playGame() {
-  let computerScore = 0;
-  let playerScore = 0;
-  let computerSelections = [];
-  let playerSelections = [];
+function handleRockClick() {
+  playerSelections.push('rock');
+  let computerChoice = getComputerChoice();
+  computerSelections.push(computerChoice);
 
-  for (let index = 0; index < 5; index++) {
-    let playerChoice = prompt('Make a choice(rock,paper,scissors)');
-    playerSelections.push(playerChoice);
-    let computerChoice = getComputerChoice();
-    computerSelections.push(computerChoice);
-
-    let winner = playRound(playerChoice, computerChoice);
-    if (winner === 'player') {
-      playerScore++;
-    }
-    if (winner === 'computer') {
-      computerScore++;
-    }
+  let winner = playRound('rock', computerChoice);
+  if (winner === 'player') {
+    playerScore++;
+  }
+  if (winner === 'computer') {
+    computerScore++;
   }
 
+  if (playerScore === 5 || computerScore === 5) {
+    displayResult();
+  }
+}
+
+function handlePaperClick() {
+  playerSelections.push('paper');
+  let computerChoice = getComputerChoice();
+  computerSelections.push(computerChoice);
+
+  let winner = playRound('paper', computerChoice);
+  if (winner === 'player') {
+    playerScore++;
+  }
+  if (winner === 'computer') {
+    computerScore++;
+  }
+  if (playerScore === 5 || computerScore === 5) {
+    displayResult();
+  }
+}
+
+function handleScissorsClick() {
+  playerSelections.push('scissors');
+  let computerChoice = getComputerChoice();
+  computerSelections.push(computerChoice);
+
+  let winner = playRound('scissors', computerChoice);
+  if (winner === 'player') {
+    playerScore++;
+  }
+  if (winner === 'computer') {
+    computerScore++;
+  }
+  if (playerScore === 5 || computerScore === 5) {
+    displayResult();
+  }
+}
+
+function displayResult() {
+  let winner = '';
+  let winnerChoices = '';
+  let losserChoices = '';
   if (computerScore > playerScore) {
-    console.log('Computer Wins by ' + computerScore);
-    console.log('Computer Choices :- ' + computerSelections);
-    console.log('Player Choices :- ' + playerSelections);
+    // console.log('Computer Wins by ' + computerScore);
+    winner = 'Computer Wins by ' + computerScore;
+    // console.log('Computer Choices :- ' + computerSelections);
+    winnerChoices = 'Computer Choices :- ' + computerSelections;
+    // console.log('Player Choices :- ' + playerSelections);
+    losserChoices = 'Player Choices :- ' + playerSelections;
   } else if (computerScore < playerScore) {
-    console.log('You win by ' + playerScore);
-    console.log('Your Choices are :- ' + playerSelections);
-    console.log('Computer Choices :- ' + computerSelections);
+    // console.log('You win by ' + playerScore);
+    winner = 'You win by ' + playerScore;
+    // console.log('Your Choices are :- ' + playerSelections);
+    winnerChoices = 'Your Choices are :- ' + playerSelections;
+    // console.log('Computer Choices :- ' + computerSelections);
+    losserChoices = 'Player Choices :- ' + playerSelections;
   }
+
+  const resultsDiv = document.querySelector('#results');
+  const playerResultsPara = document.createElement('p');
+  const computerResultsPara = document.createElement('p');
+
+  if (playerScore !== 0 || computerScore !== 0) {
+    playerResultsPara.textContent = 'Player results : - ' + playerScore;
+    computerResultsPara.textContent = 'Computer results :- ' + computerScore;
+
+    const winnerDiv = document.querySelector('#winner');
+    const winnerParagraph = document.createElement('p');
+    winnerParagraph.textContent =
+      winner + '\n' + winnerChoices + '\n' + losserChoices;
+    winnerDiv.appendChild(winnerParagraph);
+  }
+
+  resultsDiv.appendChild(playerResultsPara);
+  resultsDiv.appendChild(computerResultsPara);
+}
+
+function playGame() {
+  const contentDiv = document.querySelector('#content');
+
+  const rockBtn = document.createElement('button');
+  const paperBtn = document.createElement('button');
+  const scissorsBtn = document.createElement('button');
+
+  rockBtn.textContent = 'Rock';
+  rockBtn.addEventListener('click', handleRockClick);
+
+  paperBtn.textContent = 'Paper';
+  paperBtn.value = 'paper';
+  paperBtn.addEventListener('click', handlePaperClick);
+
+  scissorsBtn.textContent = 'Scissors';
+  scissorsBtn.value = 'scissors';
+  scissorsBtn.addEventListener('click', handleScissorsClick);
+
+  contentDiv.appendChild(rockBtn);
+  contentDiv.appendChild(paperBtn);
+  contentDiv.appendChild(scissorsBtn);
+  displayResult();
 }
 
 playGame();
