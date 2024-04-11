@@ -22,3 +22,10 @@ button {
   font-size: 16px;
   border: 2px solid #04aa6d;
 }
+
+.winner {
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+}

@@ -131,8 +131,11 @@ function displayResult() {
     const winnerDiv = document.querySelector('#winner');
     const winnerParagraph = document.createElement('p');
     winnerParagraph.textContent =
-      winner + '\n' + winnerChoices + '\n' + losserChoices;
+      // winner + '\n' + winnerChoices + '\n' + losserChoices;
+      winner;
     winnerDiv.appendChild(winnerParagraph);
+
+    winnerDiv.classList.add('winner');
   }
 
   resultsDiv.appendChild(playerResultsPara);
