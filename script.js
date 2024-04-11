@@ -38,10 +38,20 @@ function playRound(playerSelectedValue, computerSelectedValue) {
   }
 }
 
+function displayPlayerPicks(playerPick, computerPick) {
+  const divPlayerPicks = document.querySelector('#player-picks');
+  const ul = document.querySelector('ul');
+  const li = document.createElement('li');
+  li.textContent = playerPick + ' vs ' + computerPick;
+  ul.appendChild(li);
+  divPlayerPicks.appendChild(ul);
+}
+
 function handleRockClick() {
   playerSelections.push('rock');
   let computerChoice = getComputerChoice();
   computerSelections.push(computerChoice);
+  displayPlayerPicks('rock', computerChoice);
 
   let winner = playRound('rock', computerChoice);
   if (winner === 'player') {
@@ -60,7 +70,7 @@ function handlePaperClick() {
   playerSelections.push('paper');
   let computerChoice = getComputerChoice();
   computerSelections.push(computerChoice);
-
+  displayPlayerPicks('paper', computerChoice);
   let winner = playRound('paper', computerChoice);
   if (winner === 'player') {
     playerScore++;
@@ -77,7 +87,7 @@ function handleScissorsClick() {
   playerSelections.push('scissors');
   let computerChoice = getComputerChoice();
   computerSelections.push(computerChoice);
-
+  displayPlayerPicks('scissors', computerChoice);
   let winner = playRound('scissors', computerChoice);
   if (winner === 'player') {
     playerScore++;
@@ -107,7 +117,7 @@ function displayResult() {
     // console.log('Your Choices are :- ' + playerSelections);
     winnerChoices = 'Your Choices are :- ' + playerSelections;
     // console.log('Computer Choices :- ' + computerSelections);
-    losserChoices = 'Player Choices :- ' + playerSelections;
+    losserChoices = 'Computer Choices :- ' + computerSelections;
   }
 
   const resultsDiv = document.querySelector('#results');

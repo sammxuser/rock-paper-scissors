@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors Game</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Welcome to the Rock, Paper, Scissors Game</h1>
+    <div class="header">
+      <h1>Welcome to the Rock, Paper, Scissors Game</h1>
+      <p>
+        Play against the computer <br />
+        <i>Click any button below to start</i>, score will be computed after 5
+        wins <br />
+        Refresh page to restart the game <br />
+        Good luck!
+      </p>
+    </div>
     <div id="content"></div>
+    <div id="player-picks">
+      <ul></ul>
+    </div>
     <div id="results"></div>
     <div id="winner"></div>
   </body>
